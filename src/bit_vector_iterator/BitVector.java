@@ -34,18 +34,7 @@ public class BitVector {
 
 	} // Determine if the bit at position i is set.
 
-
-	/*takes an integer i as input
-		 sets the respective bit at position i in the 
-		 32 bit representation of stored integer*/
-	public void set(int i){ 
-		//in an integer the max bit that can be set is 31st position
-		int maxIndex =32;
-		//take a module of index with 32 to avoid overflow
-		int innerIndex = i % maxIndex;
-		/*divide the integer i with 32 to find index of integer
-			to be set in words array*/
-		int wordIndex = i / maxIndex;
+	public void handleIndexOverflow(int wordIndex){
 		//check if wordIndex is greater than current size of array
 		if(wordIndex >= words.length)
 		{
@@ -59,7 +48,22 @@ public class BitVector {
 			for(int l=0;l<tempArr.length;l++)
 				words[l]=tempArr[l];
 		}
+	}
+	/*takes an integer i as input
+		 sets the respective bit at position i in the 
+		 32 bit representation of stored integer*/
+	public void set(int i){ 
+		//in an integer the max bit that can be set is 31st position
+		int maxIndex =32;
+		//take a module of index with 32 to avoid overflow
+		int innerIndex = i % maxIndex;
+		/*divide the integer i with 32 to find index of integer
+			to be set in words array*/
+		int wordIndex = i / maxIndex;
 
+		/* method to check if the integer to be set will cause an index over flow
+		if it causes overflow increase size of array */
+		handleIndexOverflow(wordIndex);
 
 		System.out.println("inner Index "+innerIndex + "words lenght "+words.length);
 		//get the current integer whose bit is to be set
@@ -73,9 +77,45 @@ public class BitVector {
 
 
 	} 
+	
+	//clear the given integer from set
 	public void clear(int i){ 
+		//in an integer the max bit that can be set is 31st position
+		int maxIndex =32;
+		//take a module of index with 32 to avoid overflow
+		int innerIndex = i % maxIndex;
+		/*divide the integer i with 32 to find index of integer
+					to be set in words array*/
+		int wordIndex = i / maxIndex;
 
+		/* method to check if the integer to be set will cause an index over flow
+				if it causes overflow increase size of array */
+		handleIndexOverflow(wordIndex);
+
+		System.out.println("inner Index "+innerIndex + "words lenght "+words.length);
+		//get the current integer whose bit is to be set
+		int currentInt=words[wordIndex];
+		//create an integer whose ith bit is set to 1
+		int bitToSet = (int)Math.pow(2, innerIndex);	
+		//take a complement of the bit to be set
+		bitToSet = ~bitToSet;
+		/* do an and of current integer represetation and
+					the integer representation of the index to be set*/
+		words[wordIndex]=(bitToSet & currentInt);
+		System.out.println("printing changed integer: "+words[wordIndex]);
 	} // Clear the bit at position i.
+
+	//returns the number of integers in the set 56
+	public int size(){
+		int count=0;
+		String binaryString="";
+		for(int i=0;i<words.length;i++)
+		{			
+			// returns the number of one-bits in the binary representation of stored int 
+			count+=Integer.bitCount(words[i]); 
+		}
+		return count;
+	}
 
 	public void print(){
 		System.out.println(words);
@@ -96,7 +136,9 @@ public class BitVector {
 		bv.set(32);
 		//			//bv.set(5);
 		bv.print();
-		System.out.println("check 2: "+bv.get(2)+" check 5: "+bv.get(33));
+		System.out.println("check 2: "+bv.get(2)+" check 5: "+bv.get(6));
+		bv.clear(2);
+		System.out.println("check 2: "+bv.get(2)+" check 5: "+bv.get(6));
 
 	}
 
