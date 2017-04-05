@@ -6,7 +6,7 @@ package bit_vector_iterator;
 		private char[] bits;
 		
 		public BitVector(){
-			words = new int[2];
+			words = new int[1];
 			
 		}
 		public boolean get(int i){ 
@@ -21,81 +21,50 @@ package bit_vector_iterator;
 			} // Determine if the bit at position i is set.
 		
 		
-		
+		/*takes an integer i as input
+		 sets the respective bit at position i in the 
+		 32 bit representation of stored integer*/
 		public void set(int i){ 
+			//in an integer the max bit that can be set is 31st position
 			int maxIndex =32;
-			//determine the index to be set
+			//take a module of index with 32 to avoid overflow
 			int innerIndex = i % maxIndex;
-			innerIndex = 31-innerIndex;
-			
+			/*divide the integer i with 32 to find index of integer
+			to be set in words array*/
 			int wordIndex = i / maxIndex;
-			System.out.println("inner Index "+innerIndex);
-			
-		
-			//initiliaze to 0
-			bits=new char[32];
-			for(int j=bits.length-1;j>=0;j--)
+			//check if wordIndex is greater than current size of array
+			if(wordIndex >= words.length)
 			{
-				bits[j]='0';
-				System.out.print(bits[j]);
+				//initiliaze a temporary array
+				System.out.println("inside higher index");
+				int [] tempArr = new int[words.length];
+				tempArr = words.clone();
+				words = new int[wordIndex+1];
+				for(int l=0;l<tempArr.length;l++)
+					words[l]=tempArr[l];
 			}
 			
 			
-			
-			int x=bits.length-1;
+			System.out.println("inner Index "+innerIndex + "words lenght "+words.length);
+			//get the current integer whose bit is to be set
 			int currentInt=words[wordIndex];
-			while(currentInt>0){
-				System.out.println("current int: "+currentInt+" modulo data "+(currentInt % 2));
-				
-				bits[x]=Character.forDigit((currentInt % 2),10);
-				currentInt=currentInt/2;
-				x--;
-			}
-			bits[innerIndex]='1';
-			StringBuilder binaryString = new StringBuilder(new String(bits));
-			System.out.println("printing binary"+binaryString);
-			words[wordIndex]=Integer.parseInt(binaryString.toString(),2);
+			//create an integer whose ith bit is set to 1
+			int bitToSet = (int)Math.pow(2, innerIndex);			
+			/* do an or of current integer represetation and
+			the integer representation of the index to be set*/
+			words[wordIndex]=(bitToSet | currentInt);
+			System.out.println("printing changed integer: "+words[wordIndex]);
+
 			
-			
-//			//System.out.println("string wal"+Integer.toBinaryString(words[wordIndex]));
-//			StringBuilder binaryString = new StringBuilder(Integer.toBinaryString(words[wordIndex]));
-//			System.out.println("binary"+binaryString.length());
-//			binaryString.setCharAt(innerIndex, '1');
-//			words[wordIndex]=Integer.parseInt(binaryString.toString());
-				
-		} // Set the bit at position i.
+		} 
 		public void clear(int i){ 
-//			int maxIndex =32;
-//			int innerIndex = i % maxIndex;
-//			int wordIndex = i / maxIndex;
-//			StringBuilder binaryString = new StringBuilder(Integer.toBinaryString(words[wordIndex]));
-//			binaryString.setCharAt(innerIndex, '0');
-//			words[wordIndex]=Integer.parseInt(binaryString.toString());
-			
-			
-			
-			
-			int maxIndex =32;
-			int innerIndex = i % maxIndex;
-			int wordIndex = i / maxIndex;
-			
-			bits=new char[31];
-			int x=0;
-			int currentInt=words[wordIndex];
-			while(currentInt>0){
-				bits[x]= Character.forDigit((currentInt % 2),10);
-				currentInt=currentInt/2;
-				x++;
-			}
-			bits[innerIndex]='0';
-			String binaryString = new String(bits);
-			words[wordIndex]=Integer.parseInt(binaryString,2);
+
 		} // Clear the bit at position i.
 		
 		public void print(){
 			System.out.println(words);
 			for(int i=0;i<words.length;i++){
-				System.out.print("final int"+words[i]);
+				System.out.print("final int: "+words[i]);
 			}
 		}
 		//public void addAll(BitVector b){ ... } // Set the bits in the argument BitVector b.
@@ -108,7 +77,7 @@ package bit_vector_iterator;
 			bv.set(0);
 			bv.set(2);
 			bv.set(6);
-			//bv.set(31);
+			bv.set(32);
 //			//bv.set(5);
 			bv.print();
 
