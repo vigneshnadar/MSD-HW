@@ -19,21 +19,37 @@ package bit_vector_iterator;
 			else
 				return false;
 			} // Determine if the bit at position i is set.
+		
+		
+		
 		public void set(int i){ 
 			int maxIndex =32;
+			//determine the index to be set
 			int innerIndex = i % maxIndex;
-			int wordIndex = i / maxIndex;
-		
+			innerIndex = 31-innerIndex;
 			
-			bits=new char[31];
+			int wordIndex = i / maxIndex;
+			System.out.println("inner Index "+innerIndex);
+			
+		
+			//initiliaze to 0
+			bits=new char[32];
 			for(int j=bits.length-1;j>=0;j--)
+			{
 				bits[j]='0';
-			int x=0;
+				System.out.print(bits[j]);
+			}
+			
+			
+			
+			int x=bits.length-1;
 			int currentInt=words[wordIndex];
 			while(currentInt>0){
-				bits[x]=(char) (currentInt % 2);
+				System.out.println("current int: "+currentInt+" modulo data "+(currentInt % 2));
+				
+				bits[x]=Character.forDigit((currentInt % 2),10);
 				currentInt=currentInt/2;
-				x++;
+				x--;
 			}
 			bits[innerIndex]='1';
 			StringBuilder binaryString = new StringBuilder(new String(bits));
@@ -67,7 +83,7 @@ package bit_vector_iterator;
 			int x=0;
 			int currentInt=words[wordIndex];
 			while(currentInt>0){
-				bits[x]=(char) (currentInt % 2);
+				bits[x]= Character.forDigit((currentInt % 2),10);
 				currentInt=currentInt/2;
 				x++;
 			}
@@ -90,12 +106,12 @@ package bit_vector_iterator;
 			BitVector bv = new BitVector();
 //			bv.print();
 			bv.set(0);
-//			//bv.set(1);
+			bv.set(2);
+			bv.set(6);
+			//bv.set(31);
 //			//bv.set(5);
 			bv.print();
-			String a="10000000000000000000000000000000";
-			
-			System.out.print("str lengt "+a.length()+" "+Integer.parseInt("1000000000000000000000000000000",2));
+
 		}
 		
 		}
