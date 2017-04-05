@@ -4,11 +4,53 @@ package bit_vector_iterator;
 public class BitVector {
 	//array to store compact representation of integers
 	private int[] words;
+	
+	private class BitVectorIterator implements Iterator<Integer> 
+	{
+		private int bitCount=0,currentCount=0;
+		BitVector b;
+		
+		public BitVectorIterator(BitVector b){
+			bitCount=b.size();
+			this.b=b;
+		}
+		public boolean hasAnotherElement(){
+			return currentCount < bitCount ;
+		}
+		
+		 public Integer nextElement(){
+			 
+			 while(currentCount < bitCount)
+			 {				
+				 if(b.get(currentCount))
+				 {
+					 currentCount++;
+					 return currentCount-1;
+				 }
+				 currentCount++;
+				 
+			 }
+			 return -1;
+		 }
+	}
+	
+	
+	public Iterator<Integer> iterator()
+	{ 
+		return new BitVectorIterator(this);
+	}
+
 
 	public BitVector(){
 		words = new int[1];
 
 	}
+	
+	//return the words array
+	public int[] getWords(){
+		return this.words;
+	}
+	
 	public boolean get(int i){ 
 		//in an integer the max bit that can be set is 31st position
 		int maxIndex =32;
@@ -105,16 +147,16 @@ public class BitVector {
 		System.out.println("printing changed integer: "+words[wordIndex]);
 	} // Clear the bit at position i.
 
-	//returns the number of integers in the set 56
+	//returns the number of integers in the set 
 	public int size(){
-		int count=0;
-		String binaryString="";
-		for(int i=0;i<words.length;i++)
-		{			
-			// returns the number of one-bits in the binary representation of stored int 
-			count+=Integer.bitCount(words[i]); 
-		}
-		return count;
+//		int count=0;
+//		for(int i=0;i<words.length;i++)
+//		{			
+//			// returns the number of one-bits in the binary representation of stored int 
+//			count+=Integer.bitCount(words[i]); 
+//		}
+//		return count;
+		return ((words.length * 32)- words.length);
 	}
 
 	public void print(){
@@ -134,11 +176,13 @@ public class BitVector {
 		bv.set(2);
 		bv.set(6);
 		bv.set(32);
-		//			//bv.set(5);
 		bv.print();
 		System.out.println("check 2: "+bv.get(2)+" check 5: "+bv.get(6));
 		bv.clear(2);
 		System.out.println("check 2: "+bv.get(2)+" check 5: "+bv.get(6));
+		Iterator<Integer> iter = bv.iterator();
+		while(iter.hasAnotherElement())
+			System.out.println(iter.nextElement());
 
 	}
 
