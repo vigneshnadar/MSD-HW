@@ -21,26 +21,42 @@ public class NodeCountVisitor implements NodeVisitor {
 
 
 	public void IterateAndVisit(Node n){
-		
+		Iterator<Node> it = n.iterator();
 		Node child=null;
-		if(n.children != null){
-			child=n.children;
-			visitNode(child);
-		}
-			for(int i=0;i<n.subNodes.size();i++)
-				visitNode(n.subNodes.get(i));
-	}
-	
-	public void visitNode(Node child){
-		if (child instanceof Head){
-			visitHead((Head)child);
-		} else if (child instanceof B){
-			visitB((B)child);
-		} else if (child instanceof Body){
-			visitBody((Body)child);
+		while(it.hasAnotherElement())
+		{
+			child=it.nextElement();
+			if (child instanceof Head){
+				visitHead((Head)child);
+			} else if (child instanceof B){
+				visitB((B)child);
+			} else if (child instanceof Body){
+				visitBody((Body)child);
+			}
 		}
 	}
 	
+	
+//public void IterateAndVisit(Node n){
+//		
+//		Node child=null;
+//		if(n.children != null){
+//			child=n.children;
+//			visitNode(child);
+//		}
+//			for(int i=0;i<n.subNodes.size();i++)
+//				visitNode(n.subNodes.get(i));
+//	}
+//	
+//	public void visitNode(Node child){
+//		if (child instanceof Head){
+//			visitHead((Head)child);
+//		} else if (child instanceof B){
+//			visitB((B)child);
+//		} else if (child instanceof Body){
+//			visitBody((Body)child);
+//		}
+//	}
 	public void visitHTML(HTML h){
 		HTMLCount+=1;
 		IterateAndVisit(h);
