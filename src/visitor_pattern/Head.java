@@ -1,4 +1,4 @@
-package html_factory;
+package visitor_pattern;
 
 public class Head extends Node {
 

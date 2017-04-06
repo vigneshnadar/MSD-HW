@@ -1,4 +1,4 @@
-package html_factory;
+package visitor_pattern;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +40,7 @@ public class B extends Node {
 		return finalText;
 	}
 	
+
 	
 	public static void main(String[] args){
 		Map<String,String> divAtts = new HashMap<String,String>();
