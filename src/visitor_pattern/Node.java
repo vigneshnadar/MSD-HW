@@ -6,7 +6,7 @@ import java.util.Map;
 
 import bit_vector_iterator.Iterator;
 
-public abstract class Node implements Iterator<Node>{
+public abstract class Node {
 
 	//returns the textual respresentation of the code for children at that node
 	public abstract String textualRepresentation();
