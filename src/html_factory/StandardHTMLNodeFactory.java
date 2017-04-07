@@ -19,7 +19,7 @@ public class StandardHTMLNodeFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	@Override
-	public Div makeDiv(Map<String,String> attributes,List<Object> listOfNode)
+	public Div makeDiv(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		return new Div(attributes,(List<Node>)(Object)listOfNode);
 	}
@@ -36,7 +36,7 @@ public class StandardHTMLNodeFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	@Override
-	public B makeB(Map<String,String> attributes,List<Object> listOfNode)
+	public B makeB(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		return new B(attributes,(List<Node>)(Object)listOfNode);
 	}
@@ -68,7 +68,7 @@ public class StandardHTMLNodeFactory extends AbstractHTMLNodeFactory{
 		return new Title(attributes,children);
 	}
 	
-	public Title makeTitle(Map<String,String> attributes,List<Object> listOfNode)
+	public Title makeTitle(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		return new Title(attributes,(List<Node>)(Object)listOfNode);
 	}
@@ -83,7 +83,7 @@ public class StandardHTMLNodeFactory extends AbstractHTMLNodeFactory{
 		return new Body(attributes,children);
 	}
 	
-	public Body makeBody(Map<String,String> attributes,List<Object> listOfNode)
+	public Body makeBody(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		return new Body(attributes,(List<Node>)(Object)listOfNode);
 	}
@@ -99,7 +99,7 @@ public class StandardHTMLNodeFactory extends AbstractHTMLNodeFactory{
 		return new Head(attributes,children);
 	}
 	
-	public Head makeHead(Map<String,String> attributes,List<Object> listOfNode)
+	public Head makeHead(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		return new Head(attributes,(List<Node>)(Object)listOfNode);
 	}

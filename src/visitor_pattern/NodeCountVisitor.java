@@ -109,13 +109,13 @@ public void IterateAndVisit(Node n){
 		Map<String,String> divAtts = new HashMap<String,String>();
 		divAtts.put("id", "second");
 		divAtts.put("class", "bar");
-		Div div = factory.makeDiv(divAtts, "b");
+		Node div = factory.makeDiv(divAtts, "b");
 		Map<String,String> noAttributes = new HashMap<String,String>();
-		B b = factory.makeB(noAttributes, div);
-		HTML html = factory.makeHTML(noAttributes, b);
+		Node b = factory.makeB(noAttributes, div);
+		Node html = factory.makeHTML(noAttributes, b);
 		//System.out.println(html.textualRepresentation());
 		NodeCountVisitor nc = new NodeCountVisitor(html);
-		nc.visitHTML(html);
+		nc.visitHTML((HTML)html);
 		nc.report();
 	}
 }

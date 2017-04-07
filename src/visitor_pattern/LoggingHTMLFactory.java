@@ -23,7 +23,7 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	@Override
-	public Div makeDiv(Map<String,String> attributes,List<Object> listOfNode)
+	public Div makeDiv(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		Div d = new Div(attributes,(List<Node>)(Object)listOfNode);
 		System.out.println(d.textualRepresentation());
@@ -46,7 +46,7 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	@Override
-	public B makeB(Map<String,String> attributes,List<Object> listOfNode)
+	public B makeB(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		B b = new B(attributes,(List<Node>)(Object)listOfNode); 
 		System.out.println(b.textualRepresentation());
@@ -69,7 +69,7 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	@Override
-	public HTML makeHTML(Map<String,String> attributes,List<Object> listOfNode)
+	public HTML makeHTML(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		HTML html = new HTML(attributes,(List<Node>)(Object)listOfNode); 
 		System.out.println(html.textualRepresentation());
@@ -91,7 +91,7 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	@Override
-	public Head makeHead(Map<String,String> attributes,List<Object> listOfNode)
+	public Head makeHead(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		Head head = new Head(attributes,(List<Node>)(Object)listOfNode); 
 		System.out.println(head.textualRepresentation());
@@ -112,7 +112,7 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 		return title;
 	}
 	
-	public Title makeTitle(Map<String,String> attributes,List<Object> listOfNode)
+	public Title makeTitle(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		Title title = new Title(attributes,(List<Node>)(Object)listOfNode); 
 		System.out.println(title.textualRepresentation());
@@ -135,7 +135,7 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	@Override
-	public Body makeBody(Map<String,String> attributes,List<Object> listOfNode)
+	public Body makeBody(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		Body body = new Body(attributes,(List<Node>)(Object)listOfNode); 
 		System.out.println(body.textualRepresentation());
