@@ -1,0 +1,6 @@
+converts the interface of BitVector into another interface StringSet that clients expect 
+Here we want to use an existing class, BitVector and its interface does not match the one we need ▪StringSet
+
+ we need to use several existing subclasses, but it’s impractical to adapt their interface by subclassing every one.
+ The Adapter design pattern helps us in reusing the all the functions of BitVector and give out the
+ functionality expected by StringSet

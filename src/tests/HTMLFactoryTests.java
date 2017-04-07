@@ -39,13 +39,13 @@ public class HTMLFactoryTests {
 		assertEquals(html.textualRepresentation(), "<html><div id=second class=bar>b</div></html>");
 		
 		//test subNodes
-//		List<Node> subNode = new ArrayList<Node>();
-//		B b = new B(noAttributes,"testing html");
-//		subNode.add(div);
-//		subNode.add(b);
-//		html = factory.makeHTML(divAtts, subNode);
-		//System.out.println(html.textualRepresentation());
-		//assertEquals(html.textualRepresentation(), "<html id=second class=bar><div id=second class=bar>b</div><b>testing html</b></html>");
+		List<Node> subNode = new ArrayList<Node>();
+		B b = new B(noAttributes,"testing html");
+		subNode.add(div);
+		subNode.add(b);
+		HTML html1 = factory.makeHTML(divAtts, subNode);
+		System.out.println(html1.textualRepresentation());
+		assertEquals(html1.textualRepresentation(), "<html id=second class=bar><div id=second class=bar>b</div><b>testing html</b></html>");
 		
 		}
 	

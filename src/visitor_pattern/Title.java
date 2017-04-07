@@ -52,4 +52,26 @@ public class Title extends Node {
 		
 		return finalText;
 	}
+	
+
+	public Map<String,String> getAttributes(){
+		return this.attributes;
+	}
+	
+	
+	public  String customTextualRepresentation(){
+		finalText=startTag;
+		for(String k: attributes.keySet()){
+			finalText=finalText+" "+k+"="+attributes.get(k);
+		}
+
+		finalText=finalText+">";
+				
+		return finalText;
+	}
+	
+	public void accept(NodeVisitor v)
+	{
+		v.visitTitle(this);
+	}
 }

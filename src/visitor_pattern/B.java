@@ -53,6 +53,27 @@ public class B extends Node {
 				
 		return finalText;
 	}
+	
+	
+	public  String customTextualRepresentation(){
+		finalText=startTag;
+		for(String k: attributes.keySet()){
+			finalText=finalText+" "+k+"="+attributes.get(k);
+		}
+
+		finalText=finalText+">";
+				
+		return finalText;
+	}
+	
+	public Map<String,String> getAttributes(){
+		return this.attributes;
+	}
+	
+	public void accept(NodeVisitor v)
+	{
+		v.visitB(this);
+	}
 
 	public static void main(String[] args){
 		Map<String,String> divAtts = new HashMap<String,String>();

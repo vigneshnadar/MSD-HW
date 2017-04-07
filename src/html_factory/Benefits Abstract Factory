@@ -1,0 +1,6 @@
+Benefits of Abstract factory pattern. 
+It was very less work to create LoggingHTMLFactory
+I just had to extend the AbstractTHMLNodeFactory to create the LoggingHTMLFactory
+AbstractTHMLNodeFactory design pattern helped me add enhanced functionality without
+modifying the existing code. I just had to add the enhanced functionality to the existing code
+I had an interface for creating a family of similar related objects without speciftying their concrete classes

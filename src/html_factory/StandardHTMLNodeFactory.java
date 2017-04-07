@@ -52,7 +52,7 @@ public class StandardHTMLNodeFactory extends AbstractHTMLNodeFactory{
 		return new HTML(attributes,children);
 	}
 	
-	public HTML makeHTML(Map<String,String> attributes,List<Object> listOfNode)
+	public HTML makeHTML(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		return new HTML(attributes,(List<Node>)(Object)listOfNode);
 	}

@@ -69,7 +69,7 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	@Override
-	public HTML makeHTML(Map<String,String> attributes,List<Object> listOfNode)
+	public HTML makeHTML(Map<String,String> attributes,List<Node> listOfNode)
 	{
 		HTML html = new HTML(attributes,(List<Node>)(Object)listOfNode); 
 		System.out.println(html.textualRepresentation());

@@ -1,26 +1,35 @@
 package visitor_pattern;
-
+import bit_vector_iterator.*;
 import java.util.HashMap;
 import java.util.Map;
 
 import visitor_pattern.Iterator;
 
-public class NodeCountVisitor implements NodeVisitor {
+public class AttributeSearchVisitor implements NodeVisitor {
 
 
 	public int HTMLCount,HeadCount,BodyCount,TitleCount,DivCount,BCount;
+	StringSet s;
+	String attributeKey, attributeValue;
 	Node no;
-	public NodeCountVisitor(Node no){
+	public AttributeSearchVisitor(){
 		HTMLCount=0;
 		HeadCount=0;
 		BodyCount=0;
 		TitleCount=0;
 		DivCount=0;
 		BCount=0;
-		this.no=no;
+		this.attributeKey="";
+		this.attributeValue="";
+		s=new StringSet();
 	}
 
-	
+	public String searchAttribute(Node startPoint,String attributeKey,String attributeValue){
+		this.attributeKey=attributeKey;
+		this.attributeValue=attributeValue;
+		startPoint.accept(this);
+		return "";
+	}
 
 //	public void IterateAndVisit(Node n){
 //		Iterator<Node> it = n.iterator();
@@ -70,27 +79,51 @@ public void IterateAndVisit(Node n){
 	}
 	public void visitHTML(HTML h){
 		HTMLCount+=1;
+		Map<String,String> attrMap = h.getAttributes();
+		if(attrMap.containsKey(this.attributeKey))
+			if(attrMap.get(this.attributeKey).equalsIgnoreCase(this.attributeValue))
+				s.add(h.customTextualRepresentation());
 		IterateAndVisit(h);
 
 	}
 	public void visitHead(Head h){
 		HeadCount+=1;
+		Map<String,String> attrMap = h.getAttributes();
+		if(attrMap.containsKey(this.attributeKey))
+			if(attrMap.get(this.attributeKey).equalsIgnoreCase(this.attributeValue))
+				s.add(h.customTextualRepresentation());
 		IterateAndVisit(h);
 	}
 	public void visitBody(Body b){
 		BodyCount+=1;
+		Map<String,String> attrMap = b.getAttributes();
+		if(attrMap.containsKey(this.attributeKey))
+			if(attrMap.get(this.attributeKey).equalsIgnoreCase(this.attributeValue))
+				s.add(b.customTextualRepresentation());
 		IterateAndVisit(b);
 	}
 	public void visitTitle(Title t){
 		TitleCount+=1;
+		Map<String,String> attrMap = t.getAttributes();
+		if(attrMap.containsKey(this.attributeKey))
+			if(attrMap.get(this.attributeKey).equalsIgnoreCase(this.attributeValue))
+				s.add(t.customTextualRepresentation());
 		IterateAndVisit(t);
 	}
 	public void visitDiv(Div d){
 		DivCount+=1;
+		Map<String,String> attrMap = d.getAttributes();
+		if(attrMap.containsKey(this.attributeKey))
+			if(attrMap.get(this.attributeKey).equalsIgnoreCase(this.attributeValue))
+				s.add(d.customTextualRepresentation());
 		IterateAndVisit(d);
 	}
 	public void visitB(B b){
 		BCount+=1;
+		Map<String,String> attrMap = b.getAttributes();
+		if(attrMap.containsKey(this.attributeKey))
+			if(attrMap.get(this.attributeKey).equalsIgnoreCase(this.attributeValue))
+				s.add(b.customTextualRepresentation());
 		IterateAndVisit(b);
 	}
 	
@@ -112,10 +145,10 @@ public void IterateAndVisit(Node n){
 		Div div = factory.makeDiv(divAtts, "b");
 		Map<String,String> noAttributes = new HashMap<String,String>();
 		B b = factory.makeB(noAttributes, div);
-		HTML html = factory.makeHTML(noAttributes, b);
+		HTML html = factory.makeHTML(divAtts, b);
 		//System.out.println(html.textualRepresentation());
-		NodeCountVisitor nc = new NodeCountVisitor(html);
-		nc.visitHTML(html);
-		nc.report();
+		AttributeSearchVisitor av = new AttributeSearchVisitor();
+		av.searchAttribute(html, "id", "second");
+		av.report();
 	}
 }

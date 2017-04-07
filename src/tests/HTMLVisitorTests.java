@@ -26,7 +26,8 @@ public class HTMLVisitorTests {
 		HTML html = factory.makeHTML(noAttributes, b);
 		//System.out.println(html.textualRepresentation());
 		NodeCountVisitor nc = new NodeCountVisitor(html);
-		nc.visitHTML(html);
+		html.accept(nc);
+		//nc.visitHTML(html);
 		assertEquals(nc.HTMLCount,1);
 		assertEquals(nc.HeadCount,0);
 		assertEquals(nc.TitleCount,0);

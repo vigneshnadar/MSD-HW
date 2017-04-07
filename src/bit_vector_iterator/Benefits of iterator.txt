@@ -1,0 +1,7 @@
+1. Used to iterate over BitVector without exposing the internal structure 
+2. Provides an interface for accessing and iterating elements
+3. In this example although the internal reperesentation is very complex
+ as the number in final set are denoted by the position of 1 in the binary reprresentation of 
+ integers in words array
+ Iterator helps in abstraction over all of the complex logic and gives out
+ the final elements in the set

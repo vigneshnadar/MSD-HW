@@ -13,8 +13,9 @@ public abstract class Node {
 		Node children;
 		List<Node> subNodes;
 		public String startTag,endTag,finalText,innerText;
+		public abstract void accept(NodeVisitor v);
 		
-		private class NodeIterator implements Iterator<Node> 
+		/*private class NodeIterator implements Iterator<Node> 
 		{
 			private int childrenCount,subNodeCount,currentCount;
 			Node n;
@@ -50,5 +51,5 @@ public abstract class Node {
 		public Iterator<Node> iterator()
 		{ 
 			return new NodeIterator(this);
-		}
+		}*/
 }
