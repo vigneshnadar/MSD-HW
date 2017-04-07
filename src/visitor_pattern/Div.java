@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Div extends Node {
-	
+
 	String startTag="<div";
 	String endTag="</div>";
 	String finalText="";
@@ -13,15 +13,15 @@ public class Div extends Node {
 	public Div(Map<String,String> attributes,String innerText){
 		this.attributes=attributes;
 		this.innerText=innerText;
-		
+
 	}
-	
+
 	public Div(Map<String,String> attributes,Node children){
 		this.attributes=attributes;
 		this.children=children;
 	}
-	
-	
+
+
 	public Div(Map<String,String> attributes,List<Node> subNodes){
 		this.attributes=attributes;
 		this.subNodes=subNodes;
@@ -32,12 +32,24 @@ public class Div extends Node {
 		for(String k: attributes.keySet()){
 			finalText=finalText+" "+k+"="+attributes.get(k);
 		}
-		finalText=finalText+children.textualRepresentation();
-		for(Node n: subNodes)
-		{
-			finalText=finalText+n.textualRepresentation();
+		
+		finalText=finalText+">";
+		
+		if(children!=null)
+			finalText=finalText+children.textualRepresentation();
+		
+		if(subNodes!=null){
+			for(int i=0;i<subNodes.size();i++)
+			{
+				finalText=finalText+subNodes.get(i).textualRepresentation();
+			}
 		}
-		finalText=finalText+">"+innerText+endTag;
+
+		if(innerText!=null)
+			finalText=finalText+innerText;
+
+		finalText=finalText+endTag;
+		
 		return finalText;
 	}
 }

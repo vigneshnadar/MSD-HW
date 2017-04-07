@@ -31,14 +31,14 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 	}
 	
 	
-	public  B makeB(Map<String,String> attributes,String innerText)
+	public B makeB(Map<String,String> attributes,String innerText)
 	{
 		B b = new B(attributes,innerText);
 		System.out.println(b.textualRepresentation());
 		return b;
 	}
 	
-	public  B makeB(Map<String,String> attributes,Node children)
+	public B makeB(Map<String,String> attributes,Node children)
 	{
 		B b = new B(attributes,children);
 		System.out.println(b.textualRepresentation());
@@ -48,9 +48,97 @@ public class LoggingHTMLFactory extends AbstractHTMLNodeFactory{
 	@Override
 	public B makeB(Map<String,String> attributes,List<Object> listOfNode)
 	{
-		B b = new B(attributes,(List<Node>)(Object)listOfNode);
+		B b = new B(attributes,(List<Node>)(Object)listOfNode); 
 		System.out.println(b.textualRepresentation());
 		return b;
 	}
 	
+	
+	public  HTML makeHTML(Map<String,String> attributes,String innerText)
+	{
+		HTML html = new HTML(attributes,innerText);
+		System.out.println(html.textualRepresentation());
+		return html;
+	}
+	
+	public  HTML makeHTML(Map<String,String> attributes,Node children)
+	{
+		HTML html = new HTML(attributes,children);
+		System.out.println(html.textualRepresentation());
+		return html;
+	}
+	
+	@Override
+	public HTML makeHTML(Map<String,String> attributes,List<Object> listOfNode)
+	{
+		HTML html = new HTML(attributes,(List<Node>)(Object)listOfNode); 
+		System.out.println(html.textualRepresentation());
+		return html;
+	}
+	
+	public  Head makeHead(Map<String,String> attributes,String innerText)
+	{
+		Head head = new Head(attributes,innerText);
+		System.out.println(head.textualRepresentation());
+		return head;
+	}
+	
+	public  Head makeHead(Map<String,String> attributes,Node children)
+	{
+		Head head = new Head(attributes,children);
+		System.out.println(head.textualRepresentation());
+		return head;
+	}
+	
+	@Override
+	public Head makeHead(Map<String,String> attributes,List<Object> listOfNode)
+	{
+		Head head = new Head(attributes,(List<Node>)(Object)listOfNode); 
+		System.out.println(head.textualRepresentation());
+		return head;
+	}
+	
+	public  Title makeTitle(Map<String,String> attributes,String innerText)
+	{
+		Title title = new Title(attributes,innerText);
+		System.out.println(title.textualRepresentation());
+		return title;
+	}
+	
+	public  Title makeTitle(Map<String,String> attributes,Node children)
+	{
+		Title title = new Title(attributes,children);
+		System.out.println(title.textualRepresentation());
+		return title;
+	}
+	
+	public Title makeTitle(Map<String,String> attributes,List<Object> listOfNode)
+	{
+		Title title = new Title(attributes,(List<Node>)(Object)listOfNode); 
+		System.out.println(title.textualRepresentation());
+		return title;
+	}
+	
+	
+	public Body makeBody(Map<String,String> attributes,String innerText)
+	{
+		Body body = new Body(attributes,innerText);
+		System.out.println(body.textualRepresentation());
+		return body;
+	}
+	
+	public  Body makeBody(Map<String,String> attributes,Node children)
+	{
+		Body body = new Body(attributes,children);
+		System.out.println(body.textualRepresentation());
+		return body;
+	}
+	
+	@Override
+	public Body makeBody(Map<String,String> attributes,List<Object> listOfNode)
+	{
+		Body body = new Body(attributes,(List<Node>)(Object)listOfNode); 
+		System.out.println(body.textualRepresentation());
+		return body;
+	}
 }

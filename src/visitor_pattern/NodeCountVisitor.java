@@ -1,12 +1,14 @@
 package visitor_pattern;
 
-import bit_vector_iterator.BitVector;
-import bit_vector_iterator.Iterator;
+import java.util.HashMap;
+import java.util.Map;
+
+import visitor_pattern.Iterator;
 
 public class NodeCountVisitor implements NodeVisitor {
 
 
-	int HTMLCount,HeadCount,BodyCount,TitleCount,DivCount,BCount;
+	public int HTMLCount,HeadCount,BodyCount,TitleCount,DivCount,BCount;
 	Node no;
 	public NodeCountVisitor(Node no){
 		HTMLCount=0;
@@ -18,45 +20,50 @@ public class NodeCountVisitor implements NodeVisitor {
 		this.no=no;
 	}
 
+	
 
-
-	public void IterateAndVisit(Node n){
-		Iterator<Node> it = n.iterator();
+//	public void IterateAndVisit(Node n){
+//		Iterator<Node> it = n.iterator();
+//		Node child=null;
+//		while(it.hasAnotherElement())
+//		{
+//			child=it.nextElement();
+//			if (child instanceof Head){
+//				visitHead((Head)child);
+//			} else if (child instanceof B){
+//				visitB((B)child);
+//			} else if (child instanceof Body){
+//				visitBody((Body)child);
+//			}
+//		}
+//	}
+	
+	
+public void IterateAndVisit(Node n){
+		
 		Node child=null;
-		while(it.hasAnotherElement())
-		{
-			child=it.nextElement();
-			if (child instanceof Head){
-				visitHead((Head)child);
-			} else if (child instanceof B){
-				visitB((B)child);
-			} else if (child instanceof Body){
-				visitBody((Body)child);
-			}
+		if(n.children != null){
+			child=n.children;
+			visitNode(child);
 		}
+		if(n.subNodes!=null){
+			for(int i=0;i<n.subNodes.size();i++)
+				visitNode(n.subNodes.get(i));
+		}
+			
 	}
 	
-	
-//public void IterateAndVisit(Node n){
-//		
-//		Node child=null;
-//		if(n.children != null){
-//			child=n.children;
-//			visitNode(child);
-//		}
-//			for(int i=0;i<n.subNodes.size();i++)
-//				visitNode(n.subNodes.get(i));
-//	}
-//	
-//	public void visitNode(Node child){
-//		if (child instanceof Head){
-//			visitHead((Head)child);
-//		} else if (child instanceof B){
-//			visitB((B)child);
-//		} else if (child instanceof Body){
-//			visitBody((Body)child);
-//		}
-//	}
+	public void visitNode(Node child){
+		if (child instanceof Head){
+			visitHead((Head)child);
+		} else if (child instanceof B){
+			visitB((B)child);
+		} else if (child instanceof Div){
+				visitDiv((Div)child);
+		} else if (child instanceof Body){
+			visitBody((Body)child);
+		}
+	}
 	public void visitHTML(HTML h){
 		HTMLCount+=1;
 		IterateAndVisit(h);
@@ -84,9 +91,27 @@ public class NodeCountVisitor implements NodeVisitor {
 	}
 	
 	public void report(){
-		 System.out.println("files: " + DivCount);
-		 System.out.println("directories: " + BodyCount);
-		 System.out.println("links: " + TitleCount);
-		 System.out.println("total size: " + HTMLCount);
+		 System.out.println("DivCount: " + DivCount);
+		 System.out.println("BodyCount: " + BodyCount);
+		 System.out.println("TitleCount: " + TitleCount);
+		 System.out.println("HTML Count: " + HTMLCount);
+		 System.out.println("Head Count: " + HeadCount);
+		 System.out.println("B Count: " + BCount);
 		 }
+	
+	public static void main(String[] args){
+		AbstractHTMLNodeFactory factory = new StandardHTMLNodeFactory();
+		//tested innertext and childrem
+		Map<String,String> divAtts = new HashMap<String,String>();
+		divAtts.put("id", "second");
+		divAtts.put("class", "bar");
+		Div div = factory.makeDiv(divAtts, "b");
+		Map<String,String> noAttributes = new HashMap<String,String>();
+		B b = factory.makeB(noAttributes, div);
+		HTML html = factory.makeHTML(noAttributes, b);
+		//System.out.println(html.textualRepresentation());
+		NodeCountVisitor nc = new NodeCountVisitor(html);
+		nc.visitHTML(html);
+		nc.report();
+	}
 }
