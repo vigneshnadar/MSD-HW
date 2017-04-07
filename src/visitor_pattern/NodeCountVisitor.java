@@ -3,7 +3,7 @@ package visitor_pattern;
 import java.util.HashMap;
 import java.util.Map;
 
-import visitor_pattern.Iterator;
+//import visitor_pattern.Iterator;
 
 public class NodeCountVisitor implements NodeVisitor {
 

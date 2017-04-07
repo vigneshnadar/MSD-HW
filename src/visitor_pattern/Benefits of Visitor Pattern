@@ -1,0 +1,5 @@
+1. Here the basic structure of Node class was not polluted but we
+now have the flexibility to perform 2 different operations like
+Node Count and Attribute search with the help of Visitor pattern
+Visitor pattern can be beneficial in the future as well when we want to perform 
+different operations on node classes without polluting the structure of classes

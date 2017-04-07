@@ -3,13 +3,13 @@ import bit_vector_iterator.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import visitor_pattern.Iterator;
+//import visitor_pattern.Iterator;
 
 public class AttributeSearchVisitor implements NodeVisitor {
 
 
 	public int HTMLCount,HeadCount,BodyCount,TitleCount,DivCount,BCount;
-	StringSet s;
+	public StringSet s;
 	String attributeKey, attributeValue;
 	Node no;
 	public AttributeSearchVisitor(){
@@ -149,6 +149,9 @@ public void IterateAndVisit(Node n){
 		//System.out.println(html.textualRepresentation());
 		AttributeSearchVisitor av = new AttributeSearchVisitor();
 		av.searchAttribute(html, "id", "second");
+		Iterator<String> it = av.s.iterator();
+		while(it.hasAnotherElement())
+			System.out.println(it.nextElement());
 		av.report();
 	}
 }
