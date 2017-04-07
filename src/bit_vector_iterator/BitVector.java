@@ -7,20 +7,24 @@ public class BitVector {
 	
 	private class BitVectorIterator implements Iterator<Integer> 
 	{
-		private int bitCount=0,currentCount=0;
+		private int bitCount=0,currentCount;
 		BitVector b;
 		
 		public BitVectorIterator(BitVector b){
 			bitCount=b.size();
 			this.b=b;
+			currentCount=0;
 		}
+		
+		
+		
 		public boolean hasAnotherElement(){
-			return currentCount < bitCount ;
+			return currentCount < (bitCount-1) ;
 		}
 		
 		 public Integer nextElement(){
 			 
-			 while(currentCount < bitCount)
+			 while(currentCount <= bitCount)
 			 {				
 				 if(b.get(currentCount))
 				 {
@@ -120,6 +124,15 @@ public class BitVector {
 
 	} 
 	
+	
+	public void addAll(BitVector b){ 
+		Iterator<Integer> it = b.iterator();
+		while(it.hasAnotherElement())
+		{
+			set(it.nextElement());
+		}
+	} // Set the bits in the argument BitVector b
+	
 	//clear the given integer from set
 	public void clear(int i){ 
 		//in an integer the max bit that can be set is 31st position
@@ -173,13 +186,19 @@ public class BitVector {
 		BitVector bv = new BitVector();
 		//			bv.print();
 		bv.set(0);
+		System.out.println(bv.words[0]);
+		bv.set(39);
+		System.out.println(Math.pow(2, 30));
+		System.out.println("parsing "+Integer.parseInt("1000000000000000000000000000001",2));
+		System.out.println(bv.words[0]+" "+Integer.toBinaryString(2147483647));
+		System.out.println(bv.words[0]+" "+Integer.toBinaryString(bv.words[0]));
 		bv.set(2);
-		bv.set(6);
-		bv.set(32);
-		bv.print();
-		System.out.println("check 2: "+bv.get(2)+" check 5: "+bv.get(6));
-		bv.clear(2);
-		System.out.println("check 2: "+bv.get(2)+" check 5: "+bv.get(6));
+//		bv.set(6);
+//		bv.set(32);
+//		bv.print();
+//		System.out.println("check 2: "+bv.get(2)+"check 4 "+bv.get(4)+" check 6: "+bv.get(6)+" "+bv.get(7));
+//		bv.clear(2);
+//		System.out.println("check 2: "+bv.get(2)+" check 5: "+bv.get(6));
 		Iterator<Integer> iter = bv.iterator();
 		while(iter.hasAnotherElement())
 			System.out.println(iter.nextElement());
