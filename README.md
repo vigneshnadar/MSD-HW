@@ -5,3 +5,4 @@ Software Development Design Patterns : Iterator Pattern, Visitor Pattern, Factor
    Iterator Pattern, Visitor Pattern, Factory Pattern, Abstract Factory Pattern, Singleton Pattern, Adapter Pattern
 3. The problems which have been solved are given below
    https://course.ccs.neu.edu/cs5500sp17/hw3.pdf
+4. The project also contains extensive JUNIT Test cases to check for correctness of logic and code
